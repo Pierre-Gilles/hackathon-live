@@ -8,7 +8,28 @@
 module.exports = {
 
   attributes: {
-
+    
+    name:{
+      type: 'string',
+      required: true
+    },
+    
+    // repository full_name
+    // example : "Pierre-Gilles/hackathon-live"
+    repository: {
+      type:'string'
+    },
+    
+    participants: {
+      collection: 'Participant',
+      via: 'team'
+    },
+    
+    scores: {
+      collection: 'Score',
+      via: 'team'
+    }
+   
   }
 };
 
