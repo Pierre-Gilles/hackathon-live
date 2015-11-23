@@ -9,13 +9,14 @@ module.exports = {
 
   attributes: {
     
-    point: {
+    points : {
       type:'integer',
       required:true
     },
     
     team: {
-      model: 'Team'
+      model: 'Team',
+      required:true
     }
 
   }
