@@ -6,9 +6,9 @@
         .module('hackathonUTC')
         .controller('projectCtrl', projectCtrl);
 
-    projectCtrl.$inject = ['projectService'];
+    projectCtrl.$inject = ['$scope','projectService'];
 
-    function projectCtrl(projectService) {
+    function projectCtrl($scope, projectService) {
         
 		/* jshint validthis: true */
         var vm = this;
@@ -19,6 +19,7 @@
 
         function activate() {
             getProjects();
+            waitForChanges();
         }
 		
 		function getProjects(){
@@ -26,6 +27,32 @@
                 .then(function(data){
                    vm.projects = data.data; 
                 });
+        }
+        
+        function waitForChanges(){
+            
+            // on change server side, we are notified
+            io.socket.on('newScore', function (data) {
+                $scope.$apply(function () {
+                    updateElement(data);
+                    console.log(data);
+                });
+            }); 
+        }
+        
+        /**
+         * Find one element by its ID and update it 
+         */
+        function updateElement(score){
+            var found = false;
+            var i = 0;
+            while(!found && i < vm.projects.length){
+                if(vm.projects[i].id === score.team){
+                    found = true;
+                    vm.projects[i].points = score.points;
+                }
+                i++;
+            }
         }
 
     }

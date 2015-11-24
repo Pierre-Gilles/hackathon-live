@@ -14,7 +14,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="project in vm.projects">
+                <tr ng-repeat="project in vm.projects | orderBy:'-points'">
                   <th scope="row">{{ $index + 1 }}</th>
                   <td>{{ project.name  }}</td>
                   <td>{{ project.repository }}</td>

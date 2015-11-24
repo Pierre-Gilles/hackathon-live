@@ -15,8 +15,7 @@
     function projectService($http) {
 
         var service = {
-            getProjects: getProjects,
-            waitForChanges: waitForChanges
+            getProjects: getProjects
         };
 
         return service;
@@ -32,14 +31,6 @@
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                 });
-        }
-
-        function waitForChanges() {
-            return new Promise(function(resolve, reject) {
-                io.socket.on('newScore', function (data) {
-                    return resolve(data);
-                }); 
-            });
         }
     }
 })();
