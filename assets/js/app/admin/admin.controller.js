@@ -80,7 +80,8 @@
         function createParticipant(participant){
             projectService.createParticipant(participant, $localStorage.token)
                 .then(function(data){
-                       vm.participants.push(data.data);
+                       //vm.participants.push(data.data);
+                       getParticipants();
                        vm.newParticipant.name = '';
                 })
                 .catch(function(err){
