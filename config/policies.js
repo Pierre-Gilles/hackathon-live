@@ -26,7 +26,16 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': false,
+  Admin: {
+    index: true,
+    create: true,
+    login: true
+  },
+  Github: true,
+  Participant: ['jwt'],
+  Score: true,
+  Team: ['jwt']
 
   /***************************************************************************
   *                                                                          *
