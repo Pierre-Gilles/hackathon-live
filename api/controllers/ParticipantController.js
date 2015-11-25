@@ -19,7 +19,9 @@ module.exports = {
 	},
 	
 	create: function(req, res){
+		console.log(req.params.all());
 		Participant.create({name: req.param('name'), team: req.param('team')}, function(err, participant){
+			console.log(err);
 			if(err) return res.badRequest(err);
 			
 			return res.status(201).json(participant);
