@@ -32,6 +32,10 @@ module.exports = {
                 total += res[i].total;
             }
             
+            if(total === 0){
+                sails.log.warn('Warning, repo :' + user + '/' + repo + ' has been refreshed with 0...' );
+            }
+            
             cb(null, total);
         });
 	}	
