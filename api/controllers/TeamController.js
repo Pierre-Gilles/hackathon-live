@@ -11,7 +11,28 @@ module.exports = {
 		Team.create({name: req.param('name'), repository: req.param('repository') }, function(err, team){
 			if(err) return res.badRequest(err);
 			
-			return res.status(201).json(team);
+			var repo = team.repository.split("/");
+			GithubService.getNbOfCommits(repo[0], repo[1], function(err, points){
+				if(err){
+					return res.status(500).json(err);
+				} else {
+				Score.create({team: team.id, points: points }, function(err, score ){
+					if(err) return res.status(500).json(err);
+					
+					// send a broadcast message to all connected clients
+					sails.sockets.blast('newTeam', {
+						id: team.id,
+						name: team.name,
+						repository: team.repository,
+						points: score.points
+					});
+					
+					return res.status(201).json(team);
+				});
+				}
+			});
+			
+			
 		});
 	},
 	
