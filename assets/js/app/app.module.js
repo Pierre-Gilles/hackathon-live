@@ -6,5 +6,10 @@
 (function() {
     'use strict';
 
-    angular.module('hackathonUTC', []);
+    angular
+        .module('hackathonUTC', ['ngStorage']);
+        
+    angular
+        .module('hackathonUTC')
+        .constant('BASE_API', 'http://localhost:1337');
 })();

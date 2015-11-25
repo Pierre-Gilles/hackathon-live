@@ -11,6 +11,11 @@ var jwt = require('jsonwebtoken');
 module.exports = {
 	
 	
+	index: function(req, res){
+		return res.view('admin');	
+	},
+	
+	
 	create: function(req, res) {
 		if (!req.param('name') || !req.param('password')) {
 			return res.badRequest();
