@@ -1,0 +1,57 @@
+<!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Hackathon UTC</h1>
+      </div>
+      
+     <!-- ADMIN PANEL -->
+	  <div data-ng-controller="adminCtrl as vm" >
+        <div class="bg-danger" ng-show="vm.errors">{{ vm.errors }}</div>
+        <form class="form-inline" ng-show="!vm.loggedIn">
+        <div class="form-group">
+          <label class="sr-only" for="exampleInputEmail3">Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail3" ng-model="vm.name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="exampleInputPassword3">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword3" ng-model="vm.password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="vm.login(vm.name, vm.password)">Sign in</button>
+      </form>
+      <p class="bg-success" ng-show="vm.loggedIn">You are connected <a ng-click="vm.logout();">Logout</a></p>
+      
+    
+    </div>
+    
+    <!-- Project panel -->
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Projects</h3>
+      </div>
+      <div class="panel-body">
+          
+      </div>
+    </div>
+    
+    
+    
+      <!-- Participants panel -->
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Participants</h3>
+      </div>
+      <div class="panel-body">
+          
+      </div>
+    </div>
+	  
+      <p>Use <a href="../sticky-footer-navbar">the sticky footer with a fixed navbar</a> if need be, too.</p>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
