@@ -30,8 +30,13 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/importer.css">
+    
     <!--STYLES END-->
+    <style>
+          [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+      }
+     </style>
   </head>
 
   <body ng-app="hackathonUTC">
@@ -91,13 +96,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
     
     <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/app/app.module.js"></script>
-    <script src="/js/app/admin/admin.controller.js"></script>
-    <script src="/js/app/admin/admin.service.js"></script>
-    <script src="/js/app/app.run.js"></script>
-    <script src="/js/app/project/project.controller.js"></script>
-    <script src="/js/app/project/project.service.js"></script>
+    <script src="/min/production.min.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>
