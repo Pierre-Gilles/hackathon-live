@@ -6,9 +6,9 @@
         .module('hackathonUTC')
         .controller('projectCtrl', projectCtrl);
 
-    projectCtrl.$inject = ['$scope','projectService'];
+    projectCtrl.$inject = ['$scope','projectService', '$localStorage'];
 
-    function projectCtrl($scope, projectService) {
+    function projectCtrl($scope, projectService, $localStorage) {
         
 		/* jshint validthis: true */
         var vm = this;
@@ -26,6 +26,13 @@
             projectService.getProjects()
                 .then(function(data){
                    vm.projects = data.data; 
+                });
+        }
+        
+        function createProject(name, repository){
+            projectService.createProject(name, repository, $localStorage.token)
+                .then(function(data){
+                   console.log(data.data); 
                 });
         }
         
