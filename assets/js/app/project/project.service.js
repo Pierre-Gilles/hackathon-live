@@ -19,13 +19,26 @@
             getParticipants: getParticipants,
             createProject: createProject,
             createParticipant: createParticipant,
-            addScore: addScore
+            refreshProject: refreshProject
         };
 
         return service;
 
         function getProjects() {
            return $http({method: 'GET', url: '/Score/index'}).
+                success(function(data, status, headers, config) {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    return data;
+                }).
+                error(function(data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+        }
+        
+        function refreshProject(repository) {
+             return $http({method: 'POST', url: '/Github/refresh', data: {repository: repository}}).
                 success(function(data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
@@ -85,22 +98,6 @@
                 });
             
         }
-        
-        function addScore(team, points , token){
-            var headers = {};
-            headers.Authorization = token; 
-            
-            return $http({method: 'POST', url: '/score/create', headers: headers, data: {team:team, points:points}}).
-                success(function(data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                    return data;
-                }).
-                error(function(data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                });
-            
-        }
+       
     }
 })();

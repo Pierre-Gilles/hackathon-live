@@ -16,19 +16,19 @@ module.exports = {
 				if(err){
 					return res.status(500).json(err);
 				} else {
-				Score.create({team: team.id, points: points }, function(err, score ){
-					if(err) return res.status(500).json(err);
-					
-					// send a broadcast message to all connected clients
-					sails.sockets.blast('newTeam', {
-						id: team.id,
-						name: team.name,
-						repository: team.repository,
-						points: score.points
+					Score.create({team: team.id, points: points }, function(err, score ){
+						if(err) return res.status(500).json(err);
+						
+						// send a broadcast message to all connected clients
+						sails.sockets.blast('newTeam', {
+							id: team.id,
+							name: team.name,
+							repository: team.repository,
+							points: score.points
+						});
+						
+						return res.status(201).json(team);
 					});
-					
-					return res.status(201).json(team);
-				});
 				}
 			});
 			

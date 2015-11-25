@@ -18,7 +18,7 @@
         vm.logout = logout;
         vm.createParticipant = createParticipant;
         vm.createProject = createProject;
-        vm.addScore = addScore;
+        vm.refreshProject = refreshProject;
         
         // variables
         vm.errors = null;
@@ -34,6 +34,7 @@
 
         function activate() {
             getProjects();
+            waitForChange();
             if(vm.loggedIn){
                  getParticipants();
             }
@@ -44,6 +45,30 @@
                 return true;
             }else{
                 return false;
+            }
+        }
+        
+        function waitForChange(){
+            io.socket.on('newScore', function (data) {
+                $scope.$apply(function () {
+                    updateElement(data);
+                    console.log(data);
+                });
+            });
+        }
+        
+         /**
+         * Find one element by its ID and update it 
+         */
+        function updateElement(score){
+            var found = false;
+            var i = 0;
+            while(!found && i < vm.projects.length){
+                if(vm.projects[i].id === score.team){
+                    found = true;
+                    vm.projects[i].points = score.points;
+                }
+                i++;
             }
         }
 		
@@ -105,11 +130,10 @@
                 });
         }
         
-        
-        function addScore(team, points){
-            return projectService.addScore(team, points,$localStorage.token )
+        function refreshProject(repository){
+            projectService.refreshProject(repository)
                 .then(function(data){
-                    console.log(data.data);
+                    console.log(data.data); 
                 });
         }
         

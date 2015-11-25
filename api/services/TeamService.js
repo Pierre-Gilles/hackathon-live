@@ -17,18 +17,7 @@ module.exports = {
 			
 			if(!team) return cb('No team found');
 			
-			Score.query(sqlGetOneScores, [team.id], function(err, scores){
-				if(err) return cb(err);
-
-				if(!scores.length) {
-					scores[0] = {
-						points: 0
-					};
-				}
-				
-				points = points + scores[0].points/10;
-				Score.create({team: team.id, points: points}, cb);
-			});
+			Score.create({team: team.id, points: points}, cb);
 		});
 	}	
 };
