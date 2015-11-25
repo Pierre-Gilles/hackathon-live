@@ -12,16 +12,31 @@
         
 		/* jshint validthis: true */
         var vm = this;
+        
+        // functions
         vm.login = login;
         vm.logout = logout;
+        vm.createParticipant = createParticipant;
+        vm.createProject = createProject;
+        
+        
+        // variables
         vm.errors = null;
         vm.loggedIn = loggedIn();
-
-        activate();
+  
+        vm.participants = [];
+        vm.projects = [];
         
+        vm.newProject = {};
+        vm.newParticipant = {};
+        
+        activate();
 
         function activate() {
-            
+            getProjects();
+            if(vm.loggedIn){
+                 getParticipants();
+            }
         }
         
         function loggedIn (){
@@ -52,6 +67,37 @@
             vm.loggedIn = false;
             vm.errors = null;
         }
+        
+                
+        function getParticipants() {
+            projectService.getParticipants($localStorage.token)
+                .then(function(data){
+                   vm.participants = data.data; 
+                });
+        }
+        
+        function createParticipant(name, team){
+            projectService.createParticipant(name, team, $localStorage.token)
+                .then(function(data){
+                       vm.participants.push(data.data);
+                });
+        }
+        
+        function createProject(project){
+            projectService.createProject(project, $localStorage.token)
+                .then(function(data){
+                    vm.projects.push(data.data); 
+                });
+        }
+        
+        function getProjects(){
+            projectService.getProjects()
+                .then(function(data){
+                   vm.projects = data.data; 
+                });
+        }
+        
+        
        
     }
 })();
