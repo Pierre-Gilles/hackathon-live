@@ -18,7 +18,7 @@
         vm.logout = logout;
         vm.createParticipant = createParticipant;
         vm.createProject = createProject;
-        
+        vm.addScore = addScore;
         
         // variables
         vm.errors = null;
@@ -55,6 +55,7 @@
                        vm.loggedIn = true;
                        vm.errors = null;
                        console.log('Welcome ' + name + ', connected with success');
+                       activate();
                     }
                 })
                 .catch(function(err){
@@ -76,10 +77,14 @@
                 });
         }
         
-        function createParticipant(name, team){
-            projectService.createParticipant(name, team, $localStorage.token)
+        function createParticipant(participant){
+            projectService.createParticipant(participant, $localStorage.token)
                 .then(function(data){
                        vm.participants.push(data.data);
+                       vm.newParticipant.name = '';
+                })
+                .catch(function(err){
+                    console.log(err.data);
                 });
         }
         
@@ -87,6 +92,8 @@
             projectService.createProject(project, $localStorage.token)
                 .then(function(data){
                     vm.projects.push(data.data); 
+                    vm.newProject.name = '';
+                    vm.newProject.repository = '';
                 });
         }
         
@@ -94,6 +101,14 @@
             projectService.getProjects()
                 .then(function(data){
                    vm.projects = data.data; 
+                });
+        }
+        
+        
+        function addScore(team, points){
+            return projectService.addScore(team, points,$localStorage.token )
+                .then(function(data){
+                    console.log(data.data);
                 });
         }
         

@@ -37,7 +37,14 @@
                     updateElement(data);
                     console.log(data);
                 });
-            }); 
+            });
+            
+            io.socket.on('newTeam', function(data){
+                $scope.$apply(function () {
+                    vm.projects.push(data);
+                    console.log(data);
+                });
+            });
         }
         
         /**
