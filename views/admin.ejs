@@ -1,11 +1,11 @@
 <!-- Begin page content -->
-    <div class="container">
+    <div class="container" data-ng-controller="adminCtrl as vm">
       <div class="page-header">
         <h1>Hackathon UTC</h1>
       </div>
       
      <!-- ADMIN PANEL -->
-	  <div data-ng-controller="adminCtrl as vm" >
+	  <div  >
         <div class="bg-danger" ng-show="vm.errors">{{ vm.errors }}</div>
         <form class="form-inline" ng-show="!vm.loggedIn">
         <div class="form-group">
@@ -30,7 +30,36 @@
         <h3 class="panel-title">Projects</h3>
       </div>
       <div class="panel-body">
-          
+          <div class="bs-example" data-example-id="striped-table">
+            <table class="table table-striped" >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Project</th>
+                  <th>Repository</th>
+                  <th>Score</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="project in vm.projects | orderBy:'-points'">
+                  <th scope="row">{{ $index + 1 }}</th>
+                  <td>{{ project.name  }}</td>
+                  <td>{{ project.repository }}</td>
+                  <td>{{ project.points }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">#</th>
+                  <td> <input type="text" class="form-control" id="exampleInputEmail3" ng-model="vm.newProject.name" placeholder="Name"></td>
+                  <td>
+                    <input type="text" class="form-control" id="exampleInputEmail3" ng-model="vm.newProject.repository" placeholder="Repository">
+                   
+                  </td>
+                  <td><button type="submit" class="btn btn-success" ng-click="vm.createProject(vm.newProject)">Create</button></td>
+                </tr>
+              </tbody>
+            </table>
+  </div>
       </div>
     </div>
     
@@ -43,6 +72,36 @@
         <h3 class="panel-title">Participants</h3>
       </div>
       <div class="panel-body">
+         <div class="bs-example" data-example-id="striped-table">
+            <table class="table table-striped" >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Team</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="participant in vm.participants">
+                  <th scope="row">{{ $index + 1 }}</th>
+                  <td>{{ participant.name  }}</td>
+                  <td>{{ participant.team }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">#</th>
+                  <td> <input type="text" class="form-control" id="exampleInputEmail3" ng-model="vm.newParticipant.name" placeholder="Name"></td>
+                  <td>
+                    <select class="form-control" ng-model="vm.newParticipant.team">
+                        <option ng-repeat="project in vm.projects" value="project.id">{{project.name}}</option>
+                    </select> 
+                    
+                   
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+  </div>
           
       </div>
     </div>
