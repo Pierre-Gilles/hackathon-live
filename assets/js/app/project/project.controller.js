@@ -29,13 +29,6 @@
                 });
         }
         
-        function createProject(name, repository){
-            projectService.createProject(name, repository, $localStorage.token)
-                .then(function(data){
-                   console.log(data.data); 
-                });
-        }
-        
         function waitForChanges(){
             
             // on change server side, we are notified
