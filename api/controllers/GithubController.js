@@ -258,7 +258,27 @@ module.exports = {
           });
         }
     });
-	}
+	},
+  
+  refresh: function(req, res){
+      var repository = req.param('repository');
+      var repo = repository.split('/');
+      
+      GithubService.getNbOfCommits(repo[0], repo[1], function(err, points){
+        if(err){
+          return res.status(500).json(err);
+        } else {
+          TeamService.updateTeamScore(repository, points, function(err, score ){
+              if(err) return res.status(500).json(err);
+              
+              // send a broadcast message to all connected clients
+              sails.sockets.blast('newScore', score);
+              
+              return res.json(score)
+          });
+        }
+    });
+  }
 	
 };
 
