@@ -47,7 +47,7 @@
                   <td>{{ project.name  }}</td>
                   <td>{{ project.repository }}</td>
                   <td>{{ project.points }}</td>
-                  <td></td>
+                  <td><button class="btn btn-primary" ng-click="vm.refreshProject(project.repository);">Refresh</button></td>
                 </tr>
                 <tr>
                   <th scope="row">#</th>
@@ -110,45 +110,6 @@
       </div>
     </div>
     
-    
-      <!-- Points panel -->
-    
-    <div class="panel panel-default" ng-show="vm.loggedIn">
-      <div class="panel-heading">
-        <h3 class="panel-title">Points</h3>
-      </div>
-      <div class="panel-body">
-         <div class="bs-example" data-example-id="striped-table">
-            <table class="table table-striped" >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Team</th>
-                  <th>Points</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">#</th>
-                  
-                  <td>
-                    <select class="form-control" ng-model="vm.addScore.team">
-                        <option ng-repeat="project in vm.projects" value="{{project.id}}">{{project.name}}</option>
-                    </select> 
-                    
-                   
-                  </td>
-                  <td> <input type="text" class="form-control" id="exampleInputEmail3" ng-model="vm.addScore.points" placeholder="Points"></td>
-                  <td><button type="submit" class="btn btn-success" ng-click="vm.addScore(vm.addScore.team, vm.addScore.points)">Add</button></td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-          
-      </div>
-    </div>
-	  
       <p></p>
     </div>
 
