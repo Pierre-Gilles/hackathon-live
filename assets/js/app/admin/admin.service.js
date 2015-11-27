@@ -25,7 +25,7 @@
 				name:name,
 				password: password
 			};
-           return $http({method: 'POST', url: BASE_API + '/admin/login', data: data}).
+           return $http({method: 'POST', url: '/admin/login', data: data}).
                 success(function(data, status, headers, config) {
                     // this callback will be called asynchronously
                     // when the response is available
