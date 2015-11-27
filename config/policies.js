@@ -29,7 +29,7 @@ module.exports.policies = {
   '*': false,
   Admin: {
     index: true,
-    create: true,
+    create: false,
     login: true
   },
   Github: true,
